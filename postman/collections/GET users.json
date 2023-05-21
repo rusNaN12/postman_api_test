@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "6ec16493-ca9b-46d4-a333-2f24e61825ff",
+		"name": "GET users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "2866314-6ec16493-ca9b-46d4-a333-2f24e61825ff"
+	},
+	"item": [
+		{
+			"name": "Basic Test no params",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(10);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7d64681d-4ef6-4666-91a3-2bf66485dfda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Pagination without  value per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(10);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3911c8d6-f43e-4885-aa86-68cb2004c9fa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination one element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(1);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('1');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "31f6be60-3f3f-4a54-ad19-58f336385183",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination 20 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(20);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "210e7e75-98c7-454e-9660-79d0bb3e45ae",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination 100 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(100);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "28705ae4-1cc3-4d07-a508-f6acc33ca15e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=100",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination 101 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(10);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('101');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c3c50c69-cc57-40e2-8cc1-798fff4546d8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=101",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination 0 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(10);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "1e110c19-3b6f-43af-aba3-dd8306d947d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test pagination -1 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(10);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "afc64753-b3f7-484c-896a-82348f378153",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1&per_page=-1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test page 1000 with  20 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(0);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "1f384522-0ee7-4f75-bac5-7fdbe74f15b9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=1000&per_page=100",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "1000"
+						},
+						{
+							"key": "per_page",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test page 2 with  20 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(0);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('2');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "30784fdc-1ebc-404b-a770-2dc748533e3f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=2&per_page=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "2"
+						},
+						{
+							"key": "per_page",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test page 0 with  20 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(20);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "24bc315b-e07a-4c8b-a400-173b1f1df830",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=0&per_page=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "0"
+						},
+						{
+							"key": "per_page",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test page -1 with  20 element per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(200);",
+							"var responseBody = pm.response.json();",
+							"pm.expect(responseBody.length).to.eql(20);",
+							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9f8163ff-e6a8-4b7c-b9d2-52b2b34aaf0b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=-1&per_page=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "-1"
+						},
+						{
+							"key": "per_page",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

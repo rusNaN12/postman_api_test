@@ -12,82 +12,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0d4dcbff-e57c-45c6-8f38-03984997055b",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "847f1c01-2f04-461f-b159-ec380e51dbc8",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/users?page=1&per_page=20",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users"
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "1"
-						},
-						{
-							"key": "per_page",
-							"value": "20"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "users",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "372a5a8f-287b-4e9c-b402-9e0e8881c053",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "users",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
 							""
@@ -101,7 +25,17 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "PUT",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
 				"url": {
 					"raw": "{{baseUrl}}/users",

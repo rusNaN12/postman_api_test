@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "eb54eb20-6789-41b1-942e-36fbf8cf7196",
+		"name": "POST users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "2866314-eb54eb20-6789-41b1-942e-36fbf8cf7196"
+	},
+	"item": [
+		{
+			"name": "Test  withtout a body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(422);",
+							"var responseBody = pm.response.json();",
+							"",
+							" pm.expect(responseBody).to.be.an('array');",
+							"",
+							"    // Assertion for each error object",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property('field');",
+							"        pm.expect(error).to.have.property('message');",
+							"",
+							"        // Additional assertions for specific field values or messages",
+							"        if (error.field === 'email') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        } else if (error.field === 'name') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        } else if (error.field === 'gender') {",
+							"            pm.expect(error.message).to.contain(\"can\\'t be blank\");",
+							"        } else if (error.field === 'status') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        }",
+							"    });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "76b843d2-1c2e-49ef-8479-5f017fe638da",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  witht correct body with empty values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(422);",
+							"var responseBody = pm.response.json();",
+							"",
+							" pm.expect(responseBody).to.be.an('array');",
+							"",
+							"    // Assertion for each error object",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property('field');",
+							"        pm.expect(error).to.have.property('message');",
+							"",
+							"        // Additional assertions for specific field values or messages",
+							"        if (error.field === 'email') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        } else if (error.field === 'name') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        } else if (error.field === 'gender') {",
+							"            pm.expect(error.message).to.contain(\"can\\'t be blank\");",
+							"        } else if (error.field === 'status') {",
+							"            pm.expect(error.message).to.eql(\"can't be blank\");",
+							"        }",
+							"    });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c4e5a8bf-de67-4879-a56d-508a66272218",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": null,\n        \"email\": null,\n        \"gender\": null,\n        \"status\": null\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  successfull create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(201);",
+							"var responseBody = pm.response.json();",
+							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"pm.expect(requestBody.name).to.eql(responseBody.name);",
+							"pm.expect(requestBody.email).to.eql(responseBody.email);",
+							"pm.expect(requestBody.gender).to.eql(responseBody.gender);",
+							"pm.expect(requestBody.status).to.eql(responseBody.status);",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							"/*const Chance = require('chance');",
+							"const chance = new Chance();",
+							"name = chance.name();",
+							"email = name + \"@test.com\";",
+							"gender = \"Male\";",
+							"status = \"active\";",
+							"pm.variables.set('name', name);",
+							"pm.variables.set('email', email);",
+							"pm.variables.set('gender', gender);",
+							"pm.variables.set('status', status);",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4c163745-883d-449c-adda-dcd9a145d409",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  status filed  on user creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(422);",
+							"var responseBody = pm.response.json();",
+							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.expect(responseBody).to.be.an('array');",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property('field');",
+							"        pm.expect(error).to.have.property('message');",
+							"        pm.expect(error.message).to.eql(\"can't be blank\");",
+							"    });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							"/*const Chance = require('chance');",
+							"const chance = new Chance();",
+							"name = chance.name();",
+							"email = name + \"@test.com\";",
+							"gender = \"Male\";",
+							"status = \"active\";",
+							"pm.variables.set('name', name);",
+							"pm.variables.set('email', email);",
+							"pm.variables.set('gender', gender);",
+							"pm.variables.set('status', status);",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "16e6215c-a8fb-45e9-be52-efbfd6b08400",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"alive\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  gender field  on user creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(422);",
+							"var responseBody = pm.response.json();",
+							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.expect(responseBody).to.be.an('array');",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property('field');",
+							"        pm.expect(error).to.have.property('message');",
+							"        pm.expect(error.message).to.contain(\"can't be blank\");",
+							"    });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							"/*const Chance = require('chance');",
+							"const chance = new Chance();",
+							"name = chance.name();",
+							"email = name + \"@test.com\";",
+							"gender = \"Male\";",
+							"status = \"active\";",
+							"pm.variables.set('name', name);",
+							"pm.variables.set('email', email);",
+							"pm.variables.set('gender', gender);",
+							"pm.variables.set('status', status);",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "bb5ddf62-b1be-44ba-9b91-1fb39d95b7e0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"test\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  username  field  to non email formaton on user creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"",
+							"pm.response.to.have.status(422);",
+							"var responseBody = pm.response.json();",
+							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.expect(responseBody).to.be.an(\"array\");",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property(\"field\");",
+							"        pm.expect(error).to.have.property(\"message\");",
+							"        pm.expect(error.field).to.contain(\"email\");",
+							"        pm.expect(error.message).to.contain(\"is invalid\");",
+							"    });",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							"/*const Chance = require('chance');",
+							"const chance = new Chance();",
+							"name = chance.name();",
+							"email = name + \"@test.com\";",
+							"gender = \"Male\";",
+							"status = \"active\";",
+							"pm.variables.set('name', name);",
+							"pm.variables.set('email', email);",
+							"pm.variables.set('gender', gender);",
+							"pm.variables.set('status', status);",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "645cc8a2-3899-4067-86a7-ae48d8a30c20",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomFullName}}\",\n        \"gender\": \"male\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  resent same values second time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    console.log(requestBodyJson);",
+							"    var headers = pm.request.headers.toObject();",
+							"    console.log(headers);",
+							"",
+							"    // Send a new request with the stored request body",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString(),",
+							"        method: pm.request.method,",
+							"        headers: pm.request.headers.toObject(),",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: requestBodyJson",
+							"        }",
+							"    }, function (err, secondResponse) {",
+							"        console.log(secondResponse);",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(422);",
+							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
+							"        secondResponseBody.forEach(function (error) {",
+							"            pm.expect(error).to.have.property(\"field\");",
+							"            pm.expect(error).to.have.property(\"message\");",
+							"            pm.expect(error.field).to.contain(\"email\");",
+							"            pm.expect(error.message).to.contain(\"has already been taken\");",
+							"        });",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							"/*const Chance = require('chance');",
+							"const chance = new Chance();",
+							"name = chance.name();",
+							"email = name + \"@test.com\";",
+							"gender = \"Male\";",
+							"status = \"active\";",
+							"pm.variables.set('name', name);",
+							"pm.variables.set('email', email);",
+							"pm.variables.set('gender', gender);",
+							"pm.variables.set('status', status);",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c32c1fd8-2a30-4ee0-b08b-eac38214864c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
