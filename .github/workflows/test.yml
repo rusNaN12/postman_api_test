@@ -27,21 +27,25 @@ jobs:
         run: npm install -g newman 
 
       - name: Run get user collection 
+        if: always()
         env:
           token: ${{ secrets.token }}
         run: newman run postman/collections/GET\ users.json -e enviroment.json 
 
       - name: Run create user collection 
+        if: always()
         env:
           token: ${{ secrets.token }}
         run: newman run postman/collections/POST\ users.json -e enviroment.json 
 
       - name: Run update user collection 
+        if: always()
         env:
           token: ${{ secrets.token }}
         run: newman run postman/collections/PATCH\ users.json -e enviroment.json 
 
       - name: Run delete user collection 
+        if: always()
         env:
           token: ${{ secrets.token }}
         run: newman run postman/collections/DELETE\ users.json -e enviroment.json 
