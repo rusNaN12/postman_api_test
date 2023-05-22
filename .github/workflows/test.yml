@@ -37,16 +37,19 @@ jobs:
         if: always()
         env:
           token: ${{ secrets.TOKEN}}
-        run: newman run postman/collections/POST\ users.json --env-var baseUrl=$BASEURL --env-var token=$token  
+          baseUrl: ${{ secrets.BASEURL }}
+        run: newman run postman/collections/POST\ users.json --env-var baseUrl=$baseUrl --env-var token=$token  
 
       - name: Run update user collection 
         if: always()
         env:
           token: ${{ secrets.TOKEN }}
-        run: newman run postman/collections/PATCH\ users.json  --env-var baseUrl=$BASEURL --env-var token=$token 
+          baseUrl: ${{ secrets.BASEURL }}
+        run: newman run postman/collections/PATCH\ users.json  --env-var baseUrl=$baseUrl --env-var token=$token 
 
       - name: Run delete user collection 
         if: always()
         env:
           token: ${{ secrets.TOKEN }}
-        run: newman run postman/collections/DELETE\ users.json  --env-var baseUrl=$BASEURL --env-var token=$token 
+          baseUrl: ${{ secrets.BASEURL }}
+        run: newman run postman/collections/DELETE\ users.json  --env-var baseUrl=$baseUrl --env-var token=$token 
