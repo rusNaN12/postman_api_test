@@ -30,7 +30,8 @@ jobs:
         if: always()
         env:
           token: ${{ secrets.TOKEN }}
-        run: newman run postman/collections/GET\ users.json --env-var baseUrl=$BASEURL --env-var token=$token  
+          baseUrl: ${{ secrets.BASEURL }}
+        run: newman run postman/collections/GET\ users.json --env-var baseUrl=$baseUrl --env-var token=$token  
 
       - name: Run create user collection 
         if: always()
