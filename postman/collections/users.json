@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"id": "b573aa94-bb7b-4d07-8849-420a40289581",
 						"exec": [
 							""
 						],
@@ -20,7 +20,7 @@
 					}
 				}
 			],
-			"id": "82433c89-fd4d-4f4c-9a39-0fc4bd57c4b7",
+			"id": "759cc6d7-2cf5-4579-9a65-8e2420c0fd06",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -35,41 +35,17 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "users",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b573aa94-bb7b-4d07-8849-420a40289581",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"test\",\n        \"email\": \"test111111@gmail.com\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
 					}
-				}
-			],
-			"id": "759cc6d7-2cf5-4579-9a65-8e2420c0fd06",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "PATCH",
-				"header": [],
+				},
 				"url": {
 					"raw": "{{baseUrl}}/users",
 					"host": [

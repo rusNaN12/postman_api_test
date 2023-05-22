@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "083cc24a-9a9e-4685-8a34-eb049c69fb97",
+		"name": "PATCH users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "2866314-083cc24a-9a9e-4685-8a34-eb049c69fb97"
+	},
+	"item": [
+		{
+			"name": "Test Resent same test data again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"PATCH\",",
+							"        header: pm.request.headers.toObject(),",
+							"        body: requestBodyJson",
+							"    }, function (err, secondResponse) {",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(200);",
+							"        pm.expect(secondResponseBody.email).to.eql(requestBody.email);",
+							"        pm.expect(secondResponseBody.name).to.eql(requestBody.name);",
+							"        pm.expect(secondResponseBody.status).to.eql(requestBody.status);",
+							"        pm.expect(secondResponseBody.gender).to.eql(requestBody.gender);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6227bb8a-bd1d-4f84-b409-7cf4d90b0076",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test update request to non existing user id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    var someNumber = Math.floor((Math.random()*100 +1));",
+							"",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"] + someNumber,",
+							"        method: \"PATCH\",",
+							"        header: pm.request.headers.toObject(),",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify({'email': 'test'})",
+							"        }",
+							"    }, function (err, secondResponse) {",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(404);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "73553369-34f6-413b-ac8d-c68e07ecbd50",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test update email with wrong format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    ",
+							"    var newjsonValue = {",
+							"        //\"name\": \"test\",",
+							"        \"email\": \"test\",",
+							"        //\"gender\": \"female\",",
+							"        //\"status\": \"active\"",
+							"    };",
+							"    console.log(typeof JSON.stringify(newjsonValue));",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"PATCH\",",
+							"        header:{\"Content-Type\": \"application/json\"},",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]},",
+							"         body: {",
+							"             mode: 'raw',",
+							"             raw: JSON.stringify(newjsonValue)",
+							"         }",
+							"",
+							"    }, function (err, secondResponse) {",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(422);",
+							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
+							"        secondResponseBody.forEach(function (error) {",
+							"            pm.expect(error).to.have.property(\"field\");",
+							"            pm.expect(error).to.have.property(\"message\");",
+							"            pm.expect(error.field).to.contain(\"email\");",
+							"            pm.expect(error.message).to.contain(\"is invalid\");",
+							"    });",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5f2f6c35-a413-41d7-a6e3-6dcf500ba6ce",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test update status with wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    ",
+							"    var newjsonValue = {",
+							"        //\"name\": \"test\",",
+							"        //\"email\": \"test\",",
+							"        //\"gender\": \"female\",",
+							"        \"status\": \"alive\"",
+							"    };",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"PATCH\",",
+							"        header:{\"Content-Type\": \"application/json\"},",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]},",
+							"         body: {",
+							"             mode: 'raw',",
+							"             raw: JSON.stringify(newjsonValue)",
+							"         }",
+							"",
+							"    }, function (err, secondResponse) {",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(422);",
+							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
+							"        secondResponseBody.forEach(function (error) {",
+							"            pm.expect(error).to.have.property(\"field\");",
+							"            pm.expect(error).to.have.property(\"message\");",
+							"            pm.expect(error.field).to.contain(\"status\");",
+							"            pm.expect(error.message).to.contain(\"can't be blank\");",
+							"    });",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3bf2b778-21ef-42b8-a64d-3241589e1974",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test update name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    ",
+							"    var newjsonValue = {",
+							"        \"name\": requestBody.name + \"test\"",
+							"        //\"email\": \"test\",",
+							"        //\"gender\": \"female\",",
+							"        //\"status\": \"alive\"",
+							"    };",
+							"    console.log(newjsonValue);",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"PATCH\",",
+							"        header:{\"Content-Type\": \"application/json\"},",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]},",
+							"         body: {",
+							"             mode: 'raw',",
+							"             raw: JSON.stringify(newjsonValue)",
+							"         }",
+							"",
+							"    }, function (err, secondResponse) {",
+							"         var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(200);",
+							"        pm.expect(secondResponseBody.email).to.eql(requestBody.email);",
+							"        pm.expect(secondResponseBody.name).to.eql(newjsonValue.name);",
+							"        pm.expect(secondResponseBody.status).to.eql(requestBody.status);",
+							"        pm.expect(secondResponseBody.gender).to.eql(requestBody.gender);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b19d3835-ff92-49ce-ae71-4faf190a87ab",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test update emaill value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    ",
+							"    var newjsonValue = {",
+							"        \"email\": \"test\" + requestBody.email",
+							"        //\"email\": \"test\",",
+							"        //\"gender\": \"female\",",
+							"        //\"status\": \"alive\"",
+							"    };",
+							"    console.log(newjsonValue);",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"PATCH\",",
+							"        header:{\"Content-Type\": \"application/json\"},",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]},",
+							"         body: {",
+							"             mode: 'raw',",
+							"             raw: JSON.stringify(newjsonValue)",
+							"         }",
+							"",
+							"    }, function (err, secondResponse) {",
+							"         var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(200);",
+							"        pm.expect(secondResponseBody.email).to.eql(newjsonValue.email);",
+							"        pm.expect(secondResponseBody.name).to.eql(requestBody.name);",
+							"        pm.expect(secondResponseBody.status).to.eql(requestBody.status);",
+							"        pm.expect(secondResponseBody.gender).to.eql(requestBody.gender);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "ad7ff29c-ecc2-4914-beb3-f9c18b0c0ddb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

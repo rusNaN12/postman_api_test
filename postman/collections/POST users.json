@@ -516,9 +516,7 @@
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    console.log(requestBodyJson);",
-							"    var headers = pm.request.headers.toObject();",
-							"    console.log(headers);",
+							"    console.log(pm.request.method);",
 							"",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
@@ -549,23 +547,102 @@
 					"script": {
 						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
 						"exec": [
-							"/*const Chance = require('chance');",
-							"const chance = new Chance();",
-							"name = chance.name();",
-							"email = name + \"@test.com\";",
-							"gender = \"Male\";",
-							"status = \"active\";",
-							"pm.variables.set('name', name);",
-							"pm.variables.set('email', email);",
-							"pm.variables.set('gender', gender);",
-							"pm.variables.set('status', status);",
-							"*/"
+							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "c32c1fd8-2a30-4ee0-b08b-eac38214864c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test  resent same values second time Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    console.log(pm.request.method);",
+							"",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString(),",
+							"        method: pm.request.method,",
+							"        header: pm.request.headers.toObject(),",
+							"        body: requestBodyJson",
+							"    }, function (err, secondResponse) {",
+							"        console.log(secondResponse);",
+							"        var secondResponseBody = secondResponse.json();",
+							"        pm.expect(secondResponse).to.have.status(422);",
+							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
+							"        secondResponseBody.forEach(function (error) {",
+							"            pm.expect(error).to.have.property(\"field\");",
+							"            pm.expect(error).to.have.property(\"message\");",
+							"            pm.expect(error.field).to.contain(\"email\");",
+							"            pm.expect(error.message).to.contain(\"has already been taken\");",
+							"        });",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b7d77f06-db5c-4260-b9f3-930f90d361d4",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
