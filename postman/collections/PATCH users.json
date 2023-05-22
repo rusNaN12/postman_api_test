@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Test Resent same test data again",
+			"name": "Test user update with no change",
 			"event": [
 				{
 					"listen": "test",
@@ -90,29 +90,27 @@
 			"response": []
 		},
 		{
-			"name": "Test update request to non existing user id",
+			"name": "Test user update with random int as value",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"id": "6542dbb5-045b-4757-8512-ebbe3dfd2fd3",
 						"exec": [
 							"pm.test(\"Check we get normal response on request without parameters\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    var someNumber = Math.floor((Math.random()*100 +1));",
+							"    var someNumber = Math.floor((Math.random() * 100 + 1));",
 							"",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
 							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"] + someNumber,",
 							"        method: \"PATCH\",",
 							"        header: pm.request.headers.toObject(),",
-							"        body: {",
-							"            mode: 'raw',",
-							"            raw: JSON.stringify({'email': 'test'})",
-							"        }",
+							"        body: requestBodyJson",
+							"",
 							"    }, function (err, secondResponse) {",
 							"        var secondResponseBody = secondResponse.json();",
 							"        pm.expect(secondResponse).to.have.status(404);",
@@ -126,7 +124,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"id": "5d4691a1-61f0-444b-ae96-73cbadb44df4",
 						"exec": [
 							""
 						],
@@ -173,19 +171,19 @@
 			"response": []
 		},
 		{
-			"name": "Test update email with wrong format",
+			"name": "Test user update with wrong email format",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user update with wrong email format\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    ",
+							"",
 							"    var newjsonValue = {",
 							"        //\"name\": \"test\",",
 							"        \"email\": \"test\",",
@@ -197,7 +195,7 @@
 							"    pm.sendRequest({",
 							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
 							"        method: \"PATCH\",",
-							"        header:{\"Content-Type\": \"application/json\"},",
+							"        header: { \"Content-Type\": \"application/json\" },",
 							"        auth: {",
 							"            type: \"bearer\",",
 							"            bearer: [",
@@ -205,11 +203,12 @@
 							"                    key: \"token\",",
 							"                    value: pm.environment.get(\"token\"),",
 							"                    type: \"string\"",
-							"                    }]},",
-							"         body: {",
-							"             mode: 'raw',",
-							"             raw: JSON.stringify(newjsonValue)",
-							"         }",
+							"                }]",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify(newjsonValue)",
+							"        }",
 							"",
 							"    }, function (err, secondResponse) {",
 							"        var secondResponseBody = secondResponse.json();",
@@ -220,7 +219,7 @@
 							"            pm.expect(error).to.have.property(\"message\");",
 							"            pm.expect(error.field).to.contain(\"email\");",
 							"            pm.expect(error.message).to.contain(\"is invalid\");",
-							"    });",
+							"        });",
 							"    });",
 							"});",
 							""
@@ -278,30 +277,27 @@
 			"response": []
 		},
 		{
-			"name": "Test update status with wrong value",
+			"name": "Test user update with status wrong value",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user update with status wrong value\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    ",
+							"",
 							"    var newjsonValue = {",
-							"        //\"name\": \"test\",",
-							"        //\"email\": \"test\",",
-							"        //\"gender\": \"female\",",
 							"        \"status\": \"alive\"",
 							"    };",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
 							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
 							"        method: \"PATCH\",",
-							"        header:{\"Content-Type\": \"application/json\"},",
+							"        header: { \"Content-Type\": \"application/json\" },",
 							"        auth: {",
 							"            type: \"bearer\",",
 							"            bearer: [",
@@ -309,11 +305,12 @@
 							"                    key: \"token\",",
 							"                    value: pm.environment.get(\"token\"),",
 							"                    type: \"string\"",
-							"                    }]},",
-							"         body: {",
-							"             mode: 'raw',",
-							"             raw: JSON.stringify(newjsonValue)",
-							"         }",
+							"                }]",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify(newjsonValue)",
+							"        }",
 							"",
 							"    }, function (err, secondResponse) {",
 							"        var secondResponseBody = secondResponse.json();",
@@ -324,7 +321,7 @@
 							"            pm.expect(error).to.have.property(\"message\");",
 							"            pm.expect(error.field).to.contain(\"status\");",
 							"            pm.expect(error.message).to.contain(\"can't be blank\");",
-							"    });",
+							"        });",
 							"    });",
 							"});",
 							""
@@ -382,31 +379,28 @@
 			"response": []
 		},
 		{
-			"name": "Test update name",
+			"name": "Test user update name value",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user update name value\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    ",
+							"",
 							"    var newjsonValue = {",
 							"        \"name\": requestBody.name + \"test\"",
-							"        //\"email\": \"test\",",
-							"        //\"gender\": \"female\",",
-							"        //\"status\": \"alive\"",
 							"    };",
 							"    console.log(newjsonValue);",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
 							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
 							"        method: \"PATCH\",",
-							"        header:{\"Content-Type\": \"application/json\"},",
+							"        header: { \"Content-Type\": \"application/json\" },",
 							"        auth: {",
 							"            type: \"bearer\",",
 							"            bearer: [",
@@ -414,22 +408,22 @@
 							"                    key: \"token\",",
 							"                    value: pm.environment.get(\"token\"),",
 							"                    type: \"string\"",
-							"                    }]},",
-							"         body: {",
-							"             mode: 'raw',",
-							"             raw: JSON.stringify(newjsonValue)",
-							"         }",
+							"                }]",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify(newjsonValue)",
+							"        }",
 							"",
 							"    }, function (err, secondResponse) {",
-							"         var secondResponseBody = secondResponse.json();",
+							"        var secondResponseBody = secondResponse.json();",
 							"        pm.expect(secondResponse).to.have.status(200);",
 							"        pm.expect(secondResponseBody.email).to.eql(requestBody.email);",
 							"        pm.expect(secondResponseBody.name).to.eql(newjsonValue.name);",
 							"        pm.expect(secondResponseBody.status).to.eql(requestBody.status);",
 							"        pm.expect(secondResponseBody.gender).to.eql(requestBody.gender);",
 							"    });",
-							"});",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -484,31 +478,27 @@
 			"response": []
 		},
 		{
-			"name": "Test update emaill value",
+			"name": "Test user update email value",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user update email value\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    ",
+							"",
 							"    var newjsonValue = {",
 							"        \"email\": \"test\" + requestBody.email",
-							"        //\"email\": \"test\",",
-							"        //\"gender\": \"female\",",
-							"        //\"status\": \"alive\"",
 							"    };",
-							"    console.log(newjsonValue);",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
 							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
 							"        method: \"PATCH\",",
-							"        header:{\"Content-Type\": \"application/json\"},",
+							"        header: { \"Content-Type\": \"application/json\" },",
 							"        auth: {",
 							"            type: \"bearer\",",
 							"            bearer: [",
@@ -516,22 +506,22 @@
 							"                    key: \"token\",",
 							"                    value: pm.environment.get(\"token\"),",
 							"                    type: \"string\"",
-							"                    }]},",
-							"         body: {",
-							"             mode: 'raw',",
-							"             raw: JSON.stringify(newjsonValue)",
-							"         }",
+							"                }]",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify(newjsonValue)",
+							"        }",
 							"",
 							"    }, function (err, secondResponse) {",
-							"         var secondResponseBody = secondResponse.json();",
+							"        var secondResponseBody = secondResponse.json();",
 							"        pm.expect(secondResponse).to.have.status(200);",
 							"        pm.expect(secondResponseBody.email).to.eql(newjsonValue.email);",
 							"        pm.expect(secondResponseBody.name).to.eql(requestBody.name);",
 							"        pm.expect(secondResponseBody.status).to.eql(requestBody.status);",
 							"        pm.expect(secondResponseBody.gender).to.eql(requestBody.gender);",
 							"    });",
-							"});",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}

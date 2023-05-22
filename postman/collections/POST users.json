@@ -7,19 +7,19 @@
 	},
 	"item": [
 		{
-			"name": "Test  withtout a body",
+			"name": "Test user create with empty body",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with empty body\", function () {",
 							"",
-							"pm.response.to.have.status(422);",
-							"var responseBody = pm.response.json();",
+							"    pm.response.to.have.status(422);",
+							"    var responseBody = pm.response.json();",
 							"",
-							" pm.expect(responseBody).to.be.an('array');",
+							"    pm.expect(responseBody).to.be.an('array');",
 							"",
 							"    // Assertion for each error object",
 							"    responseBody.forEach(function (error) {",
@@ -37,7 +37,6 @@
 							"            pm.expect(error.message).to.eql(\"can't be blank\");",
 							"        }",
 							"    });",
-							"",
 							"});",
 							""
 						],
@@ -84,19 +83,19 @@
 			"response": []
 		},
 		{
-			"name": "Test  witht correct body with empty values",
+			"name": "Test user create with correctly set body with empty values",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with correctly set body with empty values\", function () {",
 							"",
-							"pm.response.to.have.status(422);",
-							"var responseBody = pm.response.json();",
+							"    pm.response.to.have.status(422);",
+							"    var responseBody = pm.response.json();",
 							"",
-							" pm.expect(responseBody).to.be.an('array');",
+							"    pm.expect(responseBody).to.be.an('array');",
 							"",
 							"    // Assertion for each error object",
 							"    responseBody.forEach(function (error) {",
@@ -114,7 +113,6 @@
 							"            pm.expect(error.message).to.eql(\"can't be blank\");",
 							"        }",
 							"    });",
-							"",
 							"});",
 							""
 						],
@@ -161,23 +159,22 @@
 			"response": []
 		},
 		{
-			"name": "Test  successfull create",
+			"name": "Test user create with correctly set data",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with correctly set data\", function () {",
 							"",
-							"pm.response.to.have.status(201);",
-							"var responseBody = pm.response.json();",
-							"var requestBody = JSON.parse(pm.request.body.raw);",
-							"pm.expect(requestBody.name).to.eql(responseBody.name);",
-							"pm.expect(requestBody.email).to.eql(responseBody.email);",
-							"pm.expect(requestBody.gender).to.eql(responseBody.gender);",
-							"pm.expect(requestBody.status).to.eql(responseBody.status);",
-							"",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    pm.expect(requestBody.name).to.eql(responseBody.name);",
+							"    pm.expect(requestBody.email).to.eql(responseBody.email);",
+							"    pm.expect(requestBody.gender).to.eql(responseBody.gender);",
+							"    pm.expect(requestBody.status).to.eql(responseBody.status);",
 							"});",
 							""
 						],
@@ -189,17 +186,7 @@
 					"script": {
 						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
 						"exec": [
-							"/*const Chance = require('chance');",
-							"const chance = new Chance();",
-							"name = chance.name();",
-							"email = name + \"@test.com\";",
-							"gender = \"Male\";",
-							"status = \"active\";",
-							"pm.variables.set('name', name);",
-							"pm.variables.set('email', email);",
-							"pm.variables.set('gender', gender);",
-							"pm.variables.set('status', status);",
-							"*/"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -244,26 +231,25 @@
 			"response": []
 		},
 		{
-			"name": "Test  status filed  on user creation",
+			"name": "Test user create with wrong status field",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with wrong status field\", function () {",
 							"",
-							"pm.response.to.have.status(422);",
-							"var responseBody = pm.response.json();",
-							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"    pm.response.to.have.status(422);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"",
-							"pm.expect(responseBody).to.be.an('array');",
+							"    pm.expect(responseBody).to.be.an('array');",
 							"    responseBody.forEach(function (error) {",
 							"        pm.expect(error).to.have.property('field');",
 							"        pm.expect(error).to.have.property('message');",
 							"        pm.expect(error.message).to.eql(\"can't be blank\");",
 							"    });",
-							"",
 							"});",
 							""
 						],
@@ -275,17 +261,7 @@
 					"script": {
 						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
 						"exec": [
-							"/*const Chance = require('chance');",
-							"const chance = new Chance();",
-							"name = chance.name();",
-							"email = name + \"@test.com\";",
-							"gender = \"Male\";",
-							"status = \"active\";",
-							"pm.variables.set('name', name);",
-							"pm.variables.set('email', email);",
-							"pm.variables.set('gender', gender);",
-							"pm.variables.set('status', status);",
-							"*/"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -330,26 +306,25 @@
 			"response": []
 		},
 		{
-			"name": "Test  gender field  on user creation",
+			"name": "Test user create with wrong gender field",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"id": "7bb34a5a-ef74-4762-8bee-fa70eccee8ce",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with wrong gender field \", function () {",
 							"",
-							"pm.response.to.have.status(422);",
-							"var responseBody = pm.response.json();",
-							"var requestBody = JSON.parse(pm.request.body.raw);",
+							"    pm.response.to.have.status(422);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
 							"",
-							"pm.expect(responseBody).to.be.an('array');",
+							"    pm.expect(responseBody).to.be.an('array');",
 							"    responseBody.forEach(function (error) {",
 							"        pm.expect(error).to.have.property('field');",
 							"        pm.expect(error).to.have.property('message');",
 							"        pm.expect(error.message).to.contain(\"can't be blank\");",
 							"    });",
-							"",
 							"});",
 							""
 						],
@@ -359,19 +334,9 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"id": "fa0cb4f3-8bfd-427d-84f6-7f476db80d5c",
 						"exec": [
-							"/*const Chance = require('chance');",
-							"const chance = new Chance();",
-							"name = chance.name();",
-							"email = name + \"@test.com\";",
-							"gender = \"Male\";",
-							"status = \"active\";",
-							"pm.variables.set('name', name);",
-							"pm.variables.set('email', email);",
-							"pm.variables.set('gender', gender);",
-							"pm.variables.set('status', status);",
-							"*/"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -416,49 +381,38 @@
 			"response": []
 		},
 		{
-			"name": "Test  username  field  to non email formaton on user creation",
+			"name": "Test user create with wrong email format",
 			"event": [
 				{
-					"listen": "test",
+					"listen": "prerequest",
 					"script": {
-						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"id": "2d72802d-4b14-459b-a873-294cb6f196a9",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
-							"",
-							"pm.response.to.have.status(422);",
-							"var responseBody = pm.response.json();",
-							"var requestBody = JSON.parse(pm.request.body.raw);",
-							"",
-							"pm.expect(responseBody).to.be.an(\"array\");",
-							"    responseBody.forEach(function (error) {",
-							"        pm.expect(error).to.have.property(\"field\");",
-							"        pm.expect(error).to.have.property(\"message\");",
-							"        pm.expect(error.field).to.contain(\"email\");",
-							"        pm.expect(error.message).to.contain(\"is invalid\");",
-							"    });",
-							"",
-							"});",
 							""
 						],
 						"type": "text/javascript"
 					}
 				},
 				{
-					"listen": "prerequest",
+					"listen": "test",
 					"script": {
-						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"id": "7c9decac-46bd-4f95-9598-c6a657bc42aa",
 						"exec": [
-							"/*const Chance = require('chance');",
-							"const chance = new Chance();",
-							"name = chance.name();",
-							"email = name + \"@test.com\";",
-							"gender = \"Male\";",
-							"status = \"active\";",
-							"pm.variables.set('name', name);",
-							"pm.variables.set('email', email);",
-							"pm.variables.set('gender', gender);",
-							"pm.variables.set('status', status);",
-							"*/"
+							"pm.test(\"Test user create with wrong email format\", function () {",
+							"",
+							"    pm.response.to.have.status(422);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"",
+							"    pm.expect(responseBody).to.be.an(\"array\");",
+							"    responseBody.forEach(function (error) {",
+							"        pm.expect(error).to.have.property(\"field\");",
+							"        pm.expect(error).to.have.property(\"message\");",
+							"        pm.expect(error.field).to.contain(\"email\");",
+							"        pm.expect(error.message).to.contain(\"is invalid\");",
+							"    });",
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -503,20 +457,18 @@
 			"response": []
 		},
 		{
-			"name": "Test  resent same values second time",
+			"name": "Test user create with duplicate request sent",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test user create with duplicate request sent\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    var responseBody = pm.response.json();",
 							"    var requestBody = JSON.parse(pm.request.body.raw);",
-							"",
 							"    var requestBodyJson = pm.request.body.raw;",
-							"    console.log(pm.request.method);",
 							"",
 							"    // copy data from privious request and send it again",
 							"    pm.sendRequest({",
@@ -525,7 +477,6 @@
 							"        header: pm.request.headers.toObject(),",
 							"        body: requestBodyJson",
 							"    }, function (err, secondResponse) {",
-							"        console.log(secondResponse);",
 							"        var secondResponseBody = secondResponse.json();",
 							"        pm.expect(secondResponse).to.have.status(422);",
 							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
@@ -536,8 +487,7 @@
 							"            pm.expect(error.message).to.contain(\"has already been taken\");",
 							"        });",
 							"    });",
-							"});",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -554,95 +504,6 @@
 				}
 			],
 			"id": "c32c1fd8-2a30-4ee0-b08b-eac38214864c",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Test  resent same values second time Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
-						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
-							"    pm.response.to.have.status(201);",
-							"    var responseBody = pm.response.json();",
-							"    var requestBody = JSON.parse(pm.request.body.raw);",
-							"",
-							"    var requestBodyJson = pm.request.body.raw;",
-							"    console.log(pm.request.method);",
-							"",
-							"    // copy data from privious request and send it again",
-							"    pm.sendRequest({",
-							"        url: pm.request.url.toString(),",
-							"        method: pm.request.method,",
-							"        header: pm.request.headers.toObject(),",
-							"        body: requestBodyJson",
-							"    }, function (err, secondResponse) {",
-							"        console.log(secondResponse);",
-							"        var secondResponseBody = secondResponse.json();",
-							"        pm.expect(secondResponse).to.have.status(422);",
-							"        pm.expect(secondResponseBody).to.be.an(\"array\");",
-							"        secondResponseBody.forEach(function (error) {",
-							"            pm.expect(error).to.have.property(\"field\");",
-							"            pm.expect(error).to.have.property(\"message\");",
-							"            pm.expect(error.field).to.contain(\"email\");",
-							"            pm.expect(error.message).to.contain(\"has already been taken\");",
-							"        });",
-							"    });",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "b7d77f06-db5c-4260-b9f3-930f90d361d4",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

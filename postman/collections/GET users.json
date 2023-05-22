@@ -7,18 +7,18 @@
 	},
 	"item": [
 		{
-			"name": "Basic Test no params",
+			"name": "Test basic scenario with no params",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test basic scenario with no params\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(10);",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(10);",
 							"});",
 							""
 						],
@@ -46,19 +46,19 @@
 			"response": []
 		},
 		{
-			"name": "Test Pagination without  value per page",
+			"name": "Test pagination without numbers count per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination without numbers count per page \", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(10);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(10);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
 							"});",
 							""
 						],
@@ -96,19 +96,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination one element per page",
+			"name": "Test pagination 1 element per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination 1 element per page \", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(1);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('1');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(1);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('1');",
 							"});",
 							""
 						],
@@ -146,19 +146,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination 20 element per page",
+			"name": "Test pagination with 20 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination with 20 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(20);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(20);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
 							"});",
 							""
 						],
@@ -196,19 +196,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination 100 element per page",
+			"name": "Test pagination with 100 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination with 100 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(100);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(100);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
 							"});",
 							""
 						],
@@ -246,19 +246,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination 101 element per page",
+			"name": "Test pagination with 101 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination with 101 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(10);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('101');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(10);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('101');",
 							"});",
 							""
 						],
@@ -296,19 +296,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination 0 element per page",
+			"name": "Test pagination with 0 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination with 0 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(10);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(10);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
 							"});",
 							""
 						],
@@ -346,19 +346,19 @@
 			"response": []
 		},
 		{
-			"name": "Test pagination -1 element per page",
+			"name": "Test pagination with -1 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test pagination with -1 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(10);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(10);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('10');",
 							"});",
 							""
 						],
@@ -396,19 +396,19 @@
 			"response": []
 		},
 		{
-			"name": "Test page 1000 with  20 element per page",
+			"name": "Test page max + 1 with 20 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test page max + 1 with 20 elements per page\", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(0);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(0);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('100');",
 							"});",
 							""
 						],
@@ -446,71 +446,20 @@
 			"response": []
 		},
 		{
-			"name": "Test page 2 with  20 element per page",
+			"name": "Test page 0 with 100 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test page 0 with 100 elements per page \", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(0);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
-							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('2');",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "30784fdc-1ebc-404b-a770-2dc748533e3f",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/users??page=2&per_page=20",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users"
-					],
-					"query": [
-						{
-							"key": "?page",
-							"value": "2"
-						},
-						{
-							"key": "per_page",
-							"value": "20"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Test page 0 with  20 element per page",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
-						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
-							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(20);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
-							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(20);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
 							"});",
 							""
 						],
@@ -548,20 +497,71 @@
 			"response": []
 		},
 		{
-			"name": "Test page -1 with  20 element per page",
+			"name": "Test Page 2 with 20 elements per page",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
 						"exec": [
-							"pm.test(\"Check we get normal response on request without parameters\", function () {",
+							"pm.test(\"Test Page 2 with 20 elements per page \", function () {",
 							"",
-							"pm.response.to.have.status(200);",
-							"var responseBody = pm.response.json();",
-							"pm.expect(responseBody.length).to.eql(20);",
-							"pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
-							"pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(0);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('2');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "30784fdc-1ebc-404b-a770-2dc748533e3f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users??page=2&per_page=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "?page",
+							"value": "2"
+						},
+						{
+							"key": "per_page",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Page -1 with 20 elements per page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b83aa2a0-d21c-447c-a267-282a53cecf22",
+						"exec": [
+							"pm.test(\"Test Page -1 with 20 elements per page \", function () {",
+							"",
+							"    pm.response.to.have.status(200);",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody.length).to.eql(20);",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-limit\")).to.eql('20');",
+							"    pm.expect(pm.response.headers.get(\"x-pagination-page\")).to.eql('1');",
 							"});",
 							""
 						],

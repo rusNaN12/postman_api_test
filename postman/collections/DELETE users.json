@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "20aaf7d5-5f73-47ad-8b56-3e0198327390",
+		"name": "DELETE users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "2866314-20aaf7d5-5f73-47ad-8b56-3e0198327390"
+	},
+	"item": [
+		{
+			"name": "Test user delete success scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Test user delete success scenario\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    ",
+							"    var newjsonValue = {",
+							"        \"email\": \"test\" + requestBody.email",
+							"    };",
+							"    console.log(newjsonValue);",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"DELETE\",",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]}",
+							"",
+							"    }, function (err, secondResponse) {",
+							"        pm.expect(secondResponse).to.have.status(204);",
+							"        pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"        method: \"GET\",",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                    }]}",
+							"",
+							"    }, function (err, thirdResponse) {",
+							"        pm.expect(thirdResponse).to.have.status(404);",
+							"    });",
+							"    });",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e5603ffe-bb27-414a-a53b-1c83a4cba8ba",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test user delete non existing id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a92525e6-bc03-4f1c-bd5d-84b31bb5f6b7",
+						"exec": [
+							"pm.test(\"Test user delete non existing id\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var responseBody = pm.response.json();",
+							"    var requestBody = JSON.parse(pm.request.body.raw);",
+							"    var requestBodyJson = pm.request.body.raw;",
+							"    var someNumber = Math.floor((Math.random() * 100 + 1));",
+							"",
+							"    var newjsonValue = {",
+							"        \"email\": \"test\" + requestBody.email",
+							"    };",
+							"    console.log(newjsonValue);",
+							"    // copy data from privious request and send it again",
+							"    pm.sendRequest({",
+							"        url: pm.request.url.toString() + \"/\" + responseBody[\"id\"] + someNumber,",
+							"        method: \"DELETE\",",
+							"        auth: {",
+							"            type: \"bearer\",",
+							"            bearer: [",
+							"                {",
+							"                    key: \"token\",",
+							"                    value: pm.environment.get(\"token\"),",
+							"                    type: \"string\"",
+							"                }]",
+							"        }",
+							"",
+							"    }, function (err, secondResponse) {",
+							"        pm.expect(secondResponse).to.have.status(404);",
+							"        pm.sendRequest({",
+							"            url: pm.request.url.toString() + \"/\" + responseBody[\"id\"],",
+							"            method: \"GET\",",
+							"            auth: {",
+							"                type: \"bearer\",",
+							"                bearer: [",
+							"                    {",
+							"                        key: \"token\",",
+							"                        value: pm.environment.get(\"token\"),",
+							"                        type: \"string\"",
+							"                    }]",
+							"            }",
+							"",
+							"        }, function (err, thirdResponse) {",
+							"            var thirdResponseBody = thirdResponse.json();",
+							"            pm.expect(thirdResponse).to.have.status(200);",
+							"            pm.expect(thirdResponseBody.email).to.eql(requestBody.email);",
+							"            pm.expect(thirdResponseBody.name).to.eql(requestBody.name);",
+							"            pm.expect(thirdResponseBody.status).to.eql(requestBody.status);",
+							"            pm.expect(thirdResponseBody.gender).to.eql(requestBody.gender);",
+							"        });",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8c1afd6-9c81-422b-90c4-de6550184b8d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "f76709c4-75d6-4253-b994-6bc594f6d2df",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"{{$randomFirstName}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"gender\": \"female\",\n        \"status\": \"active\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
