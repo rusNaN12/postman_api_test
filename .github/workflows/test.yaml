@@ -5,8 +5,8 @@ on:
     # Inputs the workflow accepts.
     inputs:
       name:
-        description: 'Run all Cypress tests'
-        default: 'Cypress'
+        description: 'Run postman collection with newman'
+        default: 'newman'
         required: true
         type: string
         
@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set variables
+        run: echo ${{test}} >> variables.json
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -23,8 +26,8 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
-        run: yarn install 
+      - name: Install newman 
+        run: npm install -g newman 
 
-      - name: Run Cypress tests
-        run: yarn cypress:run
+      - name: Run get user collection 
+        run: newman run postman/collections/GET\ users.json 
