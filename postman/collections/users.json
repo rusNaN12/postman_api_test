@@ -35,7 +35,7 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"url": {
 					"raw": "{{baseUrl}}/users",
