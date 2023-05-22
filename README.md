@@ -36,6 +36,23 @@ The collection uses the following environment variables:
 
 Make sure to set the appropriate values for these variables in your environment configuration.
 
+## Execute from command line
+
+### Install newman
+```bash
+npm install -g newman
+```
+
+### Execute tests
+```bash
+newman run postman/collections/GET\ users.json --env-var baseUrl=$baseUrl --env-var token=$token
+newman run postman/collections/POST\ users.json --env-var baseUrl=$baseUrl --env-var token=$token 
+newman run postman/collections/PATCH\ users.json --env-var baseUrl=$baseUrl --env-var token=$token 
+newman run postman/collections/DELETE\ users.json --env-var baseUrl=$baseUrl --env-var token=$token 
+```
+
+**NOTE** CI is configured to execute all this test navigate to Actions and execute pipeline manually.
+
 
 ## Test scenarios
 
@@ -69,7 +86,7 @@ Make sure to set the appropriate values for these variables in your environment 
 | 26  | users    | DELETE | Test user delete success scenario                          | Response code 204                                         | 
 | 27  | users    | DELETE | Test user delete non existing id                           | Response code 404                                         | 
 
-**NOTE** Test in `GET users` will fail due to actual behavior is not as per description of functionality.
+**NOTE** Test in `GET users` will fail due to behavior is not as per description of functionality.
 ## Contributing
 
 Contributions to the collection are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
