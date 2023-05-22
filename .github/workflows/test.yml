@@ -30,3 +30,18 @@ jobs:
         env:
           token: ${{ secrets.token }}
         run: newman run postman/collections/GET\ users.json -e enviroment.json 
+
+      - name: Run create user collection 
+        env:
+          token: ${{ secrets.token }}
+        run: newman run postman/collections/POST\ users.json -e enviroment.json 
+
+      - name: Run update user collection 
+        env:
+          token: ${{ secrets.token }}
+        run: newman run postman/collections/PATCH\ users.json -e enviroment.json 
+
+      - name: Run delete user collection 
+        env:
+          token: ${{ secrets.token }}
+        run: newman run postman/collections/DELETE\ users.json -e enviroment.json 
